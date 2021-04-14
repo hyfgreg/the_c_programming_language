@@ -22,6 +22,7 @@ int main(int argc, char const *argv[])
             push(atof(s));
             break;
         case '+':
+            // printf("meet + , plus\n");
             push(pop() + pop());
             break;
         case '*':
@@ -31,9 +32,21 @@ int main(int argc, char const *argv[])
             op2 = pop();
             push(pop() - op2);
             break;
+        case '/':
+            op2 = pop();
+            if (op2 != 0.0)
+            {
+                push(pop() / op2);
+            }
+            else
+            {
+                printf("error: zero divisor\n");
+            }
+            break;
         case '\n':
+            // printf("meet \\n, print res\n");
             printf("\t%.8g\n", pop());
-
+            break;
         default:
             printf("error: unknown command %s\n", s);
             break;

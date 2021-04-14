@@ -1,14 +1,30 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 #define BUFSIZE 100
 #define NUMBER '0'
+#define print(x) printf(x);printf("\n")
 
 char buf[BUFSIZE];
 int bufp = 0;
 
 int getch(void)
 {
-    return (bufp > 0) ? buf[bufp--] : getchar();
+    int tmp;
+    // printf("before getch, bufp: %d\n", bufp);
+    if (bufp > 0)
+    {
+        tmp = buf[--bufp];
+        // printf("get buf[%d]: %d\n", bufp + 1, tmp);
+    }
+    else
+    {
+        // printf("use getchar\n");
+        tmp = getchar();
+        // printf("getchar %d\n", tmp);
+    }
+    // return (bufp > 0) ? buf[--bufp] : getchar();
+    return tmp;
 }
 
 void ungetch(int c)
@@ -26,11 +42,16 @@ void ungetch(int c)
 int getop(char s[])
 {
     int i, c;
-    while (isspace((s[0] = c = getch())))
-        ;
+    while ((s[0] = c = getch()) == ' ' || c == '\t')
+    {
+        // print("is space!!!");
+    }
     s[1] = '\0';
     if (!isdigit(c) && c != '.')
+    {
+        // printf("is not a number, return: %d\n", c);
         return c; // not a number, shoule be operator
+    }
 
     i = 0;
     if (isdigit(c))
@@ -43,6 +64,7 @@ int getop(char s[])
     s[i] = '\0';
     if (c != EOF)
     {
+        // printf("c %d is not EOF, ungetch\n", c);
         ungetch(c);
     }
     return NUMBER;

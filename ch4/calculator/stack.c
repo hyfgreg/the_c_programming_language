@@ -8,7 +8,7 @@ void push(double f)
 {
     if (sp < MAXVAL)
     {
-        printf("push %g\n", f);
+        // printf("push %g\n", f);
         val[sp++] = f;
     }
     else
