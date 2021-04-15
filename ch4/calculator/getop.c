@@ -39,18 +39,54 @@ void ungetch(int c)
     }
 }
 
-int getop(char s[])
+// int getop(char s[])
+// {
+//     int i, c;
+//     while ((s[0] = c = getch()) == ' ' || c == '\t')
+//     {
+//         // print("is space!!!");
+//     }
+//     s[1] = '\0';
+//     if (!isdigit(c) && c != '.')
+//     {
+//         // printf("is not a number, return: %d\n", c);
+//         return c; // not a number, shoule be operator
+//     }
+
+//     i = 0;
+//     if (isdigit(c))
+//         while (isdigit(s[++i] = c = getch()))
+//             ;
+//     if (c == '.')
+//         while (isdigit(s[++i] = c = getch()))
+//             ;
+
+//     s[i] = '\0';
+//     if (c != EOF)
+//     {
+//         // printf("c %d is not EOF, ungetch\n", c);
+//         ungetch(c);
+//     }
+//     return NUMBER;
+// }
+
+void getop(char s[])
 {
     int i, c;
     while ((s[0] = c = getch()) == ' ' || c == '\t')
-    {
-        // print("is space!!!");
-    }
+        ;
     s[1] = '\0';
     if (!isdigit(c) && c != '.')
     {
-        // printf("is not a number, return: %d\n", c);
-        return c; // not a number, shoule be operator
+        // not a number, shoule be operator, now check what operator
+        if(c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '\n' || c == EOF)
+            return; // single character operator or EOF
+        // get 2 more ch, to get sin, exp, pow
+        // 粗暴的写了，很不优雅
+        s[1] = getch();
+        s[2] = getch();
+        s[3] = '\0';
+        return;
     }
 
     i = 0;
@@ -61,11 +97,7 @@ int getop(char s[])
         while (isdigit(s[++i] = c = getch()))
             ;
 
-    s[i] = '\0';
-    if (c != EOF)
-    {
-        // printf("c %d is not EOF, ungetch\n", c);
-        ungetch(c);
-    }
-    return NUMBER;
+    s[i] = '\0';  // 把s末尾的非数字符号替换成了\0
+    ungetch(c); // 即使是EOF也ungetch，然后再下一次循环里面拿出来，之后return
+    return;
 }
