@@ -149,5 +149,6 @@ int main(int argc, char const *argv[])
         //     break;
         // }
     }
+    clearStack();
     return 0;
 }
