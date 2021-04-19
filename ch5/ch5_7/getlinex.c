@@ -11,5 +11,5 @@ int getlinex(char s[], int lim)
         ++i;
     }
     s[i] = '\0';
-    return i;
+    return i; // i其实是长度+1, 包含了\0
 }
