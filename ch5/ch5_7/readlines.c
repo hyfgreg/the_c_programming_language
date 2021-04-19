@@ -18,10 +18,14 @@ int readlines(char *lineptr[], int maxlines)
             return -1;
         else
         {
+            // printf("address of p: %d\n", p);
+            line[len - 1] = '\0';
             strcpy(p, line);
             lineptr[nlines++] = p;
+            // printf("get line: %s, fuck\n", p);
         }
     }
+    // printf("get %d lines\n", nlines);
     return nlines;
 }
 
