@@ -1,0 +1,1 @@
+int getlinex(char[], int);

@@ -48,8 +48,28 @@ int main(int argc, char const *argv[])
         printf("Usage: find -x -n pattern\n");
     else
     {
-        
+        if (except)
+        {
+            printf("ignore: %s\n", *argv);
+        }
+        else
+        {
+            printf("grep: %s\n", *argv);
+        }
+        while (getlinex(line, MAXLINE) > 0)
+        {
+            lineno++;
+            if ((strstr(line, *argv) != NULL) != except)
+            {
+                if (number)
+                {
+                    printf("%ld: ", lineno);
+                }
+                printf("%s", line);
+                found++;
+            }
+        }
     }
 
-    return 0;
+    return found;
 }

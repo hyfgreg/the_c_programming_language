@@ -1,0 +1,1 @@
+void qsort(void *[], int left, int right, int (*comp)(void *, void *));

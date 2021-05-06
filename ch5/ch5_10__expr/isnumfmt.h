@@ -1,0 +1,1 @@
+int isnumfmt(char* number);
