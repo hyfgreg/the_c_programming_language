@@ -19,7 +19,7 @@ struct tnode *talloc(void)
 char *wordcpy(char *src)
 {
     char *dst;
-    dst = (char *)malloc(strlen(src) + 1);
+    dst = (char *)malloc(strlen(src) + 1); // +1 for '\0'
     if (dst != NULL)
         strcpy(dst, src);
     return dst;
